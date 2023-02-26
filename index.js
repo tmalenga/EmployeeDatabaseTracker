@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const userInput = require('./assets/app')
 const db = require("./db/connection");
 const express = require("express");
 const PORT = process.env.PORT || 3000;
@@ -13,6 +14,7 @@ db.connect(err => {
     console.log('Database connected.');
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
+      userInput();
     });
   });
 
