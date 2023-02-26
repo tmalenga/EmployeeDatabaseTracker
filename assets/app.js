@@ -1,6 +1,7 @@
 const db = require("../db/connection");
 const cTable = require('console.table');
 const inquirer = require("inquirer");
+const { type } = require("os");
 
 // inquirer prompts
 const init = () => {
@@ -32,13 +33,16 @@ const init = () => {
         console.log(response);
         if( response == "View all departments"){
             viewDeparments();
-        };
-
-        if( response == "View all roles"){
+        }
+        else if( response == "View all roles"){
             viewRoles();
-        };
-
-
+        }
+        else if( response == "View all employees"){
+            viewEmployees();
+        }
+        else if( response == "Add a department"){
+            addDepartment();
+        }
     })
 }
 
@@ -49,7 +53,6 @@ function viewDeparments (){
         }
         console.table(rows);
         init();
-
     })
 };
 
@@ -67,5 +70,46 @@ function viewRoles (){
 
     })
 };
+
+function viewEmployees (){
+    db.query(`SELECT employee.id, 
+                     employee.first_name, 
+                     employee.last_name 
+                     FROM employee`, (err, rows) =>{
+        if (err) { 
+            throw err; 
+        }
+        console.table(rows);
+        init();
+    })
+};
+
+function addDepartment () {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "dept_name",
+            message: "Please enter the name of the department: ",
+        }
+    ])
+    .then(data => {
+        const sql = `INSERT INTO department (name) VALUES (?)`;
+        const newDept = data.dept_name;
+        db.query(sql, newDept, (err) => {
+            if (err){
+                throw err
+            }
+            else {
+                console.log("Dept added");
+                viewDeparments();
+            }
+        });
+    })
+   
+
+}
+
+
+
 
 module.exports = init;
