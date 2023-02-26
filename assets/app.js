@@ -3,11 +3,11 @@ const cTable = require('console.table');
 const inquirer = require("inquirer");
 
 // inquirer prompts
-const userInput = () => {
+const init = () => {
     inquirer.prompt([
       {
         type: "list",
-        name: "toDo",
+        name: "userInput",
         message: "What would you like to do?",
         choices: [
           "View all departments",
@@ -27,6 +27,23 @@ const userInput = () => {
         ]
       }
     ])
+    .then(data => {
+        const response = data.userInput;
+        console.log(response);
+        if( response == "View all departments"){
+            viewDeparments();
+        }
+    })
 }
 
-module.exports = userInput;
+function viewDeparments (){
+    db.query(`SELECT * FROM department`, (err, rows) =>{
+        if (err) { 
+            throw err; 
+        }
+        console.table(rows);
+
+    })
+}
+
+module.exports = init;
