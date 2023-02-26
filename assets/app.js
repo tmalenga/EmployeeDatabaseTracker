@@ -32,7 +32,13 @@ const init = () => {
         console.log(response);
         if( response == "View all departments"){
             viewDeparments();
-        }
+        };
+
+        if( response == "View all roles"){
+            viewRoles();
+        };
+
+
     })
 }
 
@@ -42,8 +48,24 @@ function viewDeparments (){
             throw err; 
         }
         console.table(rows);
+        init();
 
     })
-}
+};
+
+function viewRoles (){
+    db.query(`SELECT role.id, 
+                     role.title, 
+                     role.salary, 
+                     department.name AS departments 
+                     FROM role LEFT JOIN department ON role.department_id = department.id`, (err, rows) =>{
+        if (err) { 
+            throw err; 
+        }
+        console.table(rows);
+        init();
+
+    })
+};
 
 module.exports = init;
