@@ -17,13 +17,13 @@ const init = () => {
           "Add a department",
           "Add a role",
           "Add an employee",
-          "Update an employee role",
-          "Update an employee's manager",
-          "View employees by manager",
-          "View employees by department",
-          "Remove a department",
-          "Remove a role",
-          "Remove an employee",
+        //   "Update an employee role",
+        //   "Update an employee's manager",
+        //   "View employees by manager",
+        //   "View employees by department",
+        //   "Remove a department",
+        //   "Remove a role",
+        //   "Remove an employee",
           "Exit"
         ]
       }
