@@ -21,7 +21,7 @@ N/A
     - Add a role
     - Add an employee
 - Based on the response provided by the user the application will populate the desired action, see walkthrough video below.
-- Download walkthrough video ![here]()
+- Download walkthrough video ![here](./EmployeeDBTracker.webm)
 
 ## Credits
 
